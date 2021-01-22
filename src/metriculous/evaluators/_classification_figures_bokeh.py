@@ -144,6 +144,7 @@ def _bokeh_confusion_matrix(
         cm = sklmetrics.confusion_matrix(y_true, y_pred)
         cm_normalized = cm.astype("float") / cm.sum()
         cm_normalized_by_pred = cm.astype("float") / cm.sum(axis=0, keepdims=True)
+        cm_normalized_by_pred[np.isnan(cm_normalized_by_pred)] = 0
         cm_normalized_by_true = cm.astype("float") / cm.sum(axis=1, keepdims=True)
 
         predicted = list()
